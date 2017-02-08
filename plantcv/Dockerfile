@@ -9,8 +9,9 @@ RUN apt-get update -y && \
 RUN bash -c "source activate python2; conda install opencv -y" && \
     cd / && git clone https://github.com/danforthcenter/plantcv.git && \
     cd /plantcv && git checkout dev && \
-    bash -c "source activate python2; python setup.py install"
+    bash -c "source activate python2; python setup.py install" 
 
 USER $NB_USER
+RUN cd ~/work && git clone https://github.com/terraref/tutorials.git
 
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]

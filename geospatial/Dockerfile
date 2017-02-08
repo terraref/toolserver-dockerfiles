@@ -8,5 +8,8 @@ RUN install2.r --error \
     ggthemes \
     ncdf.tools \
     rLiDAR \
-    traits
-RUN R -e "devtools::install_github('infotroph/traits@betydb_refactor')"
+    traits 
+RUN R -e "devtools::install_github('terraref/traits')"
+
+USER rstudio
+RUN cd ~ && git clone https://github.com/terraref/tutorials.git
