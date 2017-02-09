@@ -13,3 +13,4 @@ RUN R -e "devtools::install_github('terraref/traits')"
 
 USER rstudio
 RUN cd ~ && git clone https://github.com/terraref/tutorials.git
+USER root
