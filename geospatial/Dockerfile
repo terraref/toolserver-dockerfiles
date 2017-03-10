@@ -12,5 +12,8 @@ RUN install2.r --error \
 RUN R -e "devtools::install_github('terraref/traits')"
 
 USER rstudio
-RUN cd ~ && git clone https://github.com/terraref/tutorials.git
+
 USER root
+RUN echo "\n\ngit clone https://github.com/terraref/tutorials.git /home/\$USER/tutorials" >> /etc/cont-init.d/conf && \
+    echo "\nchown -R \$USER /home/\$USER/tutorials" >> /etc/cont-init.d/conf
+

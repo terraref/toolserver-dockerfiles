@@ -9,6 +9,7 @@ RUN conda install -c conda-forge jupyterlab && \
     conda install metpy siphon cartopy netcdf4 xarray
 
 USER $NB_USER
-RUN cd ~/work && git clone https://github.com/terraref/tutorials.git
+
+COPY start-notebook.sh /usr/local/bin/
 
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]
