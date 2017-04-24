@@ -5,8 +5,10 @@ RUN apt-get update -y && \
     apt-get install -y \
         antlr \
         aptitude \
+        bison \ 
         build-essential \
         emacs \
+        flex \ 
         gdb \
         git \
         gsl-bin \
@@ -37,8 +39,8 @@ RUN     wget https://github.com/Unidata/netcdf-c/archive/v4.4.1.1.tar.gz -O netc
         cd netcdf-c-4.4.1.1/ && ./configure --prefix=/usr/local/  && make install && make clean && \
         cd /usr/local/src 
 
-RUN     wget https://github.com/nco/nco/archive/4.6.2.tar.gz -O nco-4.6.2.tar.gz && \
-        tar xvzf nco-4.6.2.tar.gz && cd nco-4.6.2/ && \
+RUN     wget https://github.com/nco/nco/archive/4.6.6.tar.gz -O nco-4.6.6.tar.gz && \
+        tar xvzf nco-4.6.6.tar.gz && cd nco-4.6.6/ && \
         ./configure --enable-static --enable-shared --enable-udunits2 --disable-udunits --enable-gsl --enable-ncoxx --enable-netcdf4 --enable-regex --disable-dap && \
         make install && make clean
 
