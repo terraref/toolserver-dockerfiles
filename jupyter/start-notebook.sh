@@ -1,7 +1,12 @@
 #!/bin/bash
 set -e
 
-ln -s /data ~/work/
-git clone https://github.com/terraref/tutorials.git ~/work/turorials
+if [ ! -d ~/work/data ]; then
+   ln -s /data ~/work/
+fi 
+
+if [ ! -d ~/work/tutorials ]; then
+   git clone https://github.com/terraref/tutorials.git ~/work/tutorials
+fi 
 
 . /usr/local/bin/start.sh jupyter notebook $*
