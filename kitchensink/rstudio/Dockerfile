@@ -42,6 +42,8 @@ RUN R -e "devtools::install_github('terraref/traits')"
 RUN  pip install -U six opencv-python && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
       cd /plantcv && git checkout dev &&  python setup.py install
    
-RUN echo "\n\ngit clone https://github.com/terraref/tutorials.git /home/\$USER/tutorials" >> /etc/cont-init.d/conf && \
-    echo "\nchown -R \$USER /home/\$USER/tutorials" >> /etc/cont-init.d/conf \
-    echo "\nln -s /data/ /home/\$USER/data" >> /etc/cont-init.d/conf
+USER root
+
+RUN echo "\n\n if [ ! -d /home/rstudio/tutorials ]; then\n\t git clone https://github.com/terraref/tutorials.git /home/rstudio/tutorials\nfi\n" >> /etc/cont-init.d/conf && \
+    echo "\nchown -R rstudio /home/rstudio/tutorials" >> /etc/cont-init.d/conf \
+    echo "\n if [ ! -d /home/rstudio/data ]; then\n\tln -s /data/ /home/rstudio/data\nfi\n" >> /etc/cont-init.d/conf
