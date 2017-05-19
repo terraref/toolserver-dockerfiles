@@ -1,4 +1,4 @@
-FROM rocker/rstudio:latest
+FROM rocker/geospatial:latest
 MAINTAINER "Craig Willis" willis8@illinois.edu
 
 RUN apt-get update -y &&  \
@@ -24,23 +24,24 @@ RUN apt-get update -y &&  \
     pip3 install \
          numpy \
          scipy \
-         matplotlib \
-         ipython \
-         jupyter \
-         pandas \
-         sympy \
-         nose \
-         scikit-image \
-         opencv-python  && \
+         matplotlib  && \
      apt-get clean && \
      rm -rf /var/lib/apt/lists/*
 
+RUN install2.r --error \
+    GGally \
+    RCurl \
+    convertr \
+    ggthemes \
+    ncdf.tools \
+    rLiDAR \
+    traits
+RUN R -e "devtools::install_github('terraref/traits')"
+
 # Install plantcv and dependencies, only supported under Python 2.x
-RUN  pip install opencv-python && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
+RUN  pip install -U six opencv-python && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
       cd /plantcv && git checkout dev &&  python setup.py install
    
-
 RUN echo "\n\ngit clone https://github.com/terraref/tutorials.git /home/\$USER/tutorials" >> /etc/cont-init.d/conf && \
     echo "\nchown -R \$USER /home/\$USER/tutorials" >> /etc/cont-init.d/conf \
     echo "\nln -s /data/ /home/\$USER/data" >> /etc/cont-init.d/conf
-
