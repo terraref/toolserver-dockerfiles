@@ -35,7 +35,7 @@ RUN install2.r --error \
     ggthemes \
     ncdf.tools \
     rLiDAR \
-    traits
+    leaflet
 RUN R -e "devtools::install_github('terraref/traits')"
 
 # Install plantcv and dependencies, only supported under Python 2.x
