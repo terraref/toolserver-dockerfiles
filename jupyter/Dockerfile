@@ -1,15 +1,22 @@
-FROM jupyter/scipy-notebook:latest
+FROM jupyter/scipy-notebook
 
-# Install jupyterlab
-RUN conda install -c conda-forge jupyterlab && \
-    jupyter serverextension enable --py jupyterlab --sys-prefix && \
+USER root
+
+RUN apt-get update -y && \
+    apt-get install -y sqlite3 libopencv-dev python-matplotlib && \
     # install a package into the python2 environment
-    conda install -n python2 metpy siphon cartopy netcdf4 xarray && \
+    conda install -n python2 cartopy metpy netcdf4 gdal siphon xarray && \
     # install a package into the default (python 3.x) environment
-    conda install metpy siphon cartopy netcdf4 xarray
+    conda install cartopy metpy netcdf4 gdal siphon xarray && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN bash -c "source activate python2; conda install opencv -y" && \
+    cd / && git clone https://github.com/danforthcenter/plantcv.git && \
+    cd /plantcv && \
+    bash -c "source activate python2; python setup.py install" 
 
 USER $NB_USER
-
 COPY start-notebook.sh /usr/local/bin/
 
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]
