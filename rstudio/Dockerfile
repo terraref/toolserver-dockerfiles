@@ -40,7 +40,7 @@ RUN R -e "devtools::install_github('terraref/traits')"
 
 # Install plantcv and dependencies, only supported under Python 2.x
 RUN  pip install -U six opencv-python && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
-      cd /plantcv && git checkout dev &&  python setup.py install
+      cd /plantcv && python setup.py install
    
 USER rstudio
 
