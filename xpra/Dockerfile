@@ -36,6 +36,7 @@ RUN yum update -q -y && \
         geos-devel \
         proj-devel \
         python-pip \ 
+        PyQt4-web* \
         redhat-rpm-config  && \
         CFLAGS=-I/usr/include pip install pyspatialite && \
         wget -O /etc/yum.repos.d/qgis-2-10-epel-7.repo https://copr.fedoraproject.org/coprs/neteler/QGIS-2.10-Pisa/repo/epel-7/neteler-QGIS-2.10-Pisa-epel-7.repo && \
