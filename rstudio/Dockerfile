@@ -4,6 +4,7 @@ MAINTAINER "Craig Willis" willis8@illinois.edu
 RUN apt-get update -y &&  \
     apt-get install -y -qq \
          cron \
+         emacs-nox \
          python2.7-dev \
          python3-dev \
          python3-pip \
