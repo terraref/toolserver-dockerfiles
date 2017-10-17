@@ -3,12 +3,15 @@ MAINTAINER "Craig Willis" willis8@illinois.edu
 
 RUN apt-get update -y &&  \
     apt-get install -y -qq \
-         cron
+         cron \
          python2.7-dev \
          python3-dev \
          python3-pip \
+         unixodbc-dev \
+         odbc-postgresql \
          sqlite3 \
          libopencv-dev \
+         libsqliteodbc \
          python-matplotlib  && \
     easy_install pip && \
     pip install \
