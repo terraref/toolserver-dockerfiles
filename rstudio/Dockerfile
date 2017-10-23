@@ -48,3 +48,9 @@ USER root
 RUN echo "\n\n if [ ! -d /home/\$USER/tutorials ]; then\n\t git clone https://github.com/terraref/tutorials.git /home/\$USER/tutorials\nfi\n" >> /etc/cont-init.d/userconf && \
     echo "\nchown -R \$USER /home/\$USER/tutorials" >> /etc/cont-init.d/userconf  && \
     echo "\n if [ ! -d /home\$USER/data ]; then\n\tln -s /data/ /home/\$USER/data\nfi\n" >> /etc/cont-init.d/userconf
+    
+RUN apt-get update && \
+    apt-get install gdebi-core && \\
+    wget https://download2.rstudio.org/rstudio-server-1.1.383-amd64.deb && \\
+    gdebi -n rstudio-server-1.1.383-amd64.deb
+    
