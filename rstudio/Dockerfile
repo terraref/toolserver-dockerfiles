@@ -44,6 +44,7 @@ RUN install2.r --error \
     shinythemes
 RUN R -e "devtools::install_github('terraref/traits')"
 RUN R -e "devtools::install_github('rstats-db/odbc')"
+RUN R -e "devtools::install_github('rstudio/blogdown')"
 
 # Install plantcv and dependencies, only supported under Python 2.x
 RUN  pip install -U six opencv-python && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
