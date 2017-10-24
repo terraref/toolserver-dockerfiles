@@ -49,8 +49,8 @@ RUN echo "\n\n if [ ! -d /home/\$USER/tutorials ]; then\n\t git clone https://gi
     echo "\nchown -R \$USER /home/\$USER/tutorials" >> /etc/cont-init.d/userconf  && \
     echo "\n if [ ! -d /home\$USER/data ]; then\n\tln -s /data/ /home/\$USER/data\nfi\n" >> /etc/cont-init.d/userconf
     
-RUN apt-get update && \
-    apt-get install gdebi-core && \\
+RUN apt-get -y update && \
+    apt-get -y install gdebi-core && \\
     wget https://download2.rstudio.org/rstudio-server-1.1.383-amd64.deb && \\
     gdebi -n rstudio-server-1.1.383-amd64.deb
     
