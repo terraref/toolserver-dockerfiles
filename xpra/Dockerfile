@@ -30,9 +30,21 @@ RUN yum update -q -y && \
         libX11-devel \
         libXaw-devel \
         libpng-devel \
-        netcdf4-python && \
-    cd / && wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-4.8.1.tgz && \
-    tar xvfz PanoplyJ-4.8.1.tgz
+        netcdf4-python \
+        python-devel \
+        sqlite-devel \
+        geos-devel \
+        proj-devel \
+        python-pip \ 
+        PyQt4-web* \
+        redhat-rpm-config  && \
+        CFLAGS=-I/usr/include pip install pyspatialite && \
+        wget -O /etc/yum.repos.d/qgis-2-10-epel-7.repo https://copr.fedoraproject.org/coprs/neteler/QGIS-2.10-Pisa/repo/epel-7/neteler-QGIS-2.10-Pisa-epel-7.repo && \
+        yum update -q -y && \
+        yum install -y qgis qgis-grass qgis-python
+        cd / && wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-4.8.1.tgz && \
+        tar xvfz PanoplyJ-4.8.1.tgz && \
+        yum clean all
 
 RUN     cd /usr/local/src && \
         wget ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.2.24.tar.gz && \
@@ -59,6 +71,7 @@ RUN     cd /usr/local/src && \
         wget ftp://cirrus.ucsd.edu/pub/ncview/ncview-2.1.7.tar.gz && \
         tar xvfz ncview-2.1.7.tar.gz   && cd ncview-2.1.7/ && \
         ./configure && make install && make clean
+
 
 ENV PATH /PanoplyJ:$PATH
 COPY entrypoint.sh /
