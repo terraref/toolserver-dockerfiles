@@ -3,12 +3,17 @@ MAINTAINER "Craig Willis" willis8@illinois.edu
 
 RUN apt-get update -y &&  \
     apt-get install -y -qq \
+         cron \
+         emacs-nox \
          imagemagick \
          python2.7-dev \
          python3-dev \
          python3-pip \
+         unixodbc-dev \
+         odbc-postgresql \
          sqlite3 \
          libopencv-dev \
+         libsqliteodbc \
          python-matplotlib  && \
     easy_install pip && \
     pip install \
@@ -37,7 +42,10 @@ RUN install2.r --error \
     ncdf.tools \
     rLiDAR \
     leaflet \
-    optparse
+    shinythemes 
+RUN R -e "devtools::install_github('terraref/traits')"
+RUN R -e "devtools::install_github('rstats-db/odbc')"
+RUN R -e "devtools::install_github('rstudio/blogdown')"
 RUN R -e "devtools::install_github('terraref/traits')"
 RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("EBImage")'
 
