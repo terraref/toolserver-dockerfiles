@@ -3,6 +3,7 @@ MAINTAINER "Craig Willis" willis8@illinois.edu
 
 RUN apt-get update -y &&  \
     apt-get install -y -qq \
+         imagemagick \
          python2.7-dev \
          python3-dev \
          python3-pip \
@@ -35,8 +36,10 @@ RUN install2.r --error \
     ggthemes \
     ncdf.tools \
     rLiDAR \
-    leaflet
+    leaflet \
+    optparse
 RUN R -e "devtools::install_github('terraref/traits')"
+RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("EBImage")'
 
 # Install plantcv and dependencies, only supported under Python 2.x
 RUN  pip install -U six opencv-python && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
