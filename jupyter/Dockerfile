@@ -4,8 +4,6 @@ USER root
 
 RUN apt-get update -y && \
     apt-get install -y sqlite3 libopencv-dev python-matplotlib && \
-    # install a package into the python2 environment
-    conda install -n python2 cartopy metpy netcdf4 gdal siphon xarray && \
     # install a package into the default (python 3.x) environment
     conda install cartopy metpy netcdf4 gdal siphon xarray && \
     apt-get clean && \
