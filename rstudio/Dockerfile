@@ -40,6 +40,7 @@ RUN install2.r --error \
     convertr \
     ggthemes \
     ncdf.tools \
+    ncdf4 \
     rLiDAR \
     leaflet \
     shinythemes 
