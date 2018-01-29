@@ -47,7 +47,6 @@ RUN install2.r --error \
 RUN R -e "devtools::install_github('terraref/traits')"
 RUN R -e "devtools::install_github('rstats-db/odbc')"
 RUN R -e "devtools::install_github('rstudio/blogdown')"
-RUN R -e "devtools::install_github('terraref/traits')"
 RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("EBImage")'
 
 # Install plantcv and dependencies, only supported under Python 2.x
