@@ -42,8 +42,8 @@ RUN yum update -q -y && \
         wget -O /etc/yum.repos.d/qgis-2-10-epel-7.repo https://copr.fedoraproject.org/coprs/neteler/QGIS-2.10-Pisa/repo/epel-7/neteler-QGIS-2.10-Pisa-epel-7.repo && \
         yum update -q -y && \
         yum install -y qgis qgis-grass qgis-python && \
-        cd / && wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-4.8.5.tgz && \
-        tar xvfz PanoplyJ-4.8.5.tgz && \
+        cd / && wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-4.8.7.tgz && \
+        tar xvfz PanoplyJ-4.8.7.tgz && \
         yum clean all
 
 RUN     cd /usr/local/src && \
