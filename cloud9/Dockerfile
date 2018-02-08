@@ -9,6 +9,10 @@ RUN apt-get -qq update && \
 	build-essential \
 	curl \
         ca-certificates \
+        gcc \
+        g++ \
+        gdb \
+        gdbserver \
     	gdal-bin  \
         gfortran \
 	git \
