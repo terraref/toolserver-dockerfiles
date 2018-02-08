@@ -44,6 +44,9 @@ RUN apt-get -qq update && \
         apt-get -y clean all && \
         rm -rf /var/lib/apt/lists/* /tmp/* 
 
+# Default to Python3
+RUN ln -sf /usr/bin/python3 /usr/bin/python
+
 # Install Cloud9 from source
 RUN git clone --depth 1 --single-branch https://github.com/c9/core.git /cloud9
 WORKDIR /cloud9
