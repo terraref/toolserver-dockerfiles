@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-curl -s https://raw.githubusercontent.com/PecanProject/pecan/357b70e21592375827e9c55bc5e1ce8e3426bd78/scripts/load.bety.sh > /bety/load.bety.sh
+curl -s https://raw.githubusercontent.com/PecanProject/pecan/master/scripts/load.bety.sh > /bety/load.bety.sh
 chmod +x /bety/load.bety.sh
 
 /bety/update.sh
