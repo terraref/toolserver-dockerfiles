@@ -1,4 +1,4 @@
-FROM rocker/geospatial:3.5.1
+FROM rocker/geospatial:3.4.2
 MAINTAINER "Craig Willis" willis8@illinois.edu
 
 RUN apt-get update -y &&  \
