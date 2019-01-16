@@ -7,7 +7,7 @@ This image will download and import the latest BETYdb data from the TERRA-REF sy
 ## Local installation:
 
 ```sh
-docker run --name betydb -p 5432:5432 terraref/betydb-postgis
+docker run --name betydb -p 5432:5432 terraref/bety-postgis
 ```
 
 Now it will appear that you have the entire trait database running on the standard PostgreSQL port 5432 as if it were running locally.
