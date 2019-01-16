@@ -1,4 +1,4 @@
-FROM mdillon/postgis
+FROM mdillon/postgis:9.5
 
 ENV PG_USER=postgres
 ENV POSTGRES_USER=bety
