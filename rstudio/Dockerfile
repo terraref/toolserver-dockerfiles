@@ -14,6 +14,7 @@ RUN apt-get update -y &&  \
          sqlite3 \
          libopencv-dev \
          libsqliteodbc \
+         nco \
          python-matplotlib  \
          python-gdal && \
     easy_install pip && \
