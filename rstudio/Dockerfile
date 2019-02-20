@@ -1,12 +1,13 @@
 FROM rocker/geospatial:3.4.2
 MAINTAINER "Craig Willis" willis8@illinois.edu
 
+# The specific opencv-python version is needed by the plantcv install
 RUN apt-get update -y &&  \
+    apt-get remove -y python && \
     apt-get install -y -qq \
          cron \
          emacs-nox \
          imagemagick \
-         python2.7-dev \
          python3-dev \
          python3-pip \
          unixodbc-dev \
@@ -17,23 +18,18 @@ RUN apt-get update -y &&  \
          nco \
          python-matplotlib  \
          python-gdal && \
-    easy_install pip && \
-    pip install \
-         numpy \
-         scipy \
-         matplotlib \
+    pip3 install \
+         opencv-python==3.4.5.20 \
+         pandas \
          ipython \
          jupyter \
-         pandas \
          sympy \
          nose \
          scikit-image \
-         opencv-python \
-         terrautils && \
-    pip3 install \
          numpy \
          scipy \
          matplotlib  \
+         scikit-image \
          terrautils && \
      apt-get clean && \
      rm -rf /var/lib/apt/lists/*
@@ -48,14 +44,16 @@ RUN install2.r --error \
     rLiDAR \
     leaflet \
     shinythemes 
-RUN R -e "devtools::install_github('terraref/traits')"
-RUN R -e "devtools::install_github('rstats-db/odbc')"
+RUN R -e "devtools::install_github('yihui/xfun')"
 RUN R -e "devtools::install_github('rstudio/blogdown')"
+RUN R -e "devtools::install_github('terraref/traits')"
+RUN R -e "install.packages('dbplyr', repos = 'https://cloud.r-project.org')"
+RUN R -e "devtools::install_github('rstats-db/odbc')"
 RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("EBImage")'
 
-# Install plantcv and dependencies, only supported under Python 2.x
-RUN  pip install -U six opencv-python && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
-      cd /plantcv && python setup.py install
+# Install plantcv and dependencies
+RUN  pip3 install -U six && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
+      cd /plantcv && python3 setup.py install
    
 USER rstudio
 
