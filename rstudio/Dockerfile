@@ -14,7 +14,9 @@ RUN apt-get update -y &&  \
          sqlite3 \
          libopencv-dev \
          libsqliteodbc \
-         python-matplotlib  && \
+         nco \
+         python-matplotlib  \
+         python-gdal && \
     easy_install pip && \
     pip install \
          numpy \
@@ -26,11 +28,13 @@ RUN apt-get update -y &&  \
          sympy \
          nose \
          scikit-image \
-         opencv-python  && \
+         opencv-python \
+         terrautils && \
     pip3 install \
          numpy \
          scipy \
-         matplotlib  && \
+         matplotlib  \
+         terrautils && \
      apt-get clean && \
      rm -rf /var/lib/apt/lists/*
 
