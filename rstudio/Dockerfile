@@ -1,13 +1,12 @@
-FROM rocker/geospatial:3.4.2
+FROM rocker/geospatial:3.6.0
 MAINTAINER "Craig Willis" willis8@illinois.edu
 
-# The specific opencv-python version is needed by the plantcv install
 RUN apt-get update -y &&  \
-    apt-get remove -y python && \
     apt-get install -y -qq \
          cron \
          emacs-nox \
          imagemagick \
+         python2.7-dev \
          python3-dev \
          python3-pip \
          unixodbc-dev \
@@ -18,19 +17,25 @@ RUN apt-get update -y &&  \
          nco \
          python-matplotlib  \
          python-gdal && \
-    pip3 install \
+    pip3 install -U \
+         numpy \
+         python-dateutil \
+         six \
+         requests==2.21.0 \
          opencv-python==3.4.5.20 \
-         pandas \
+         scipy==1.2.2 \
+         scikit-image==0.14.3 && \
+    pip3 install \
          ipython \
          jupyter \
+         pandas \
          sympy \
          nose \
-         scikit-image \
+         statsmodels \
          numpy \
-         scipy \
          matplotlib  \
-         scikit-image \
          terrautils && \
+     apt-get autoremove -y && \
      apt-get clean && \
      rm -rf /var/lib/apt/lists/*
 
@@ -44,16 +49,14 @@ RUN install2.r --error \
     rLiDAR \
     leaflet \
     shinythemes 
-RUN R -e "devtools::install_github('yihui/xfun')"
-RUN R -e "devtools::install_github('rstudio/blogdown')"
-RUN R -e "devtools::install_github('terraref/traits')"
-RUN R -e "install.packages('dbplyr', repos = 'https://cloud.r-project.org')"
-RUN R -e "devtools::install_github('rstats-db/odbc')"
-RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("EBImage")'
 
-# Install plantcv and dependencies
-RUN  pip3 install -U six && cd / &&  git clone https://github.com/danforthcenter/plantcv.git && \
-      cd /plantcv && python3 setup.py install
+RUN R -e "devtools::install_github('terraref/traits')"
+RUN R -e "devtools::install_github('rstats-db/odbc')"
+RUN R -e "devtools::install_github('rstudio/blogdown')"
+RUN Rscript -e 'install.packages("BiocManager")'
+
+# Install plantcv and dependencies, only supported under Python 2.x
+RUN cd / && git clone https://github.com/danforthcenter/plantcv.git && cd /plantcv && python3 setup.py install
    
 USER rstudio
 
